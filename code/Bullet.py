@@ -28,7 +28,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.y += self.speed
         self.destroy_bullet()
         # Animation
-        self.current_sprite += 0.2
+        self.current_sprite += 0.1
         if self.current_sprite >= len(self.animation_sprites):
             self.current_sprite = 0
         self.image = self.animation_sprites[int(self.current_sprite)]

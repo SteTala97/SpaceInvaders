@@ -3,11 +3,12 @@ import glob
 
 class Enemy(pygame.sprite.Sprite):
     
-    def __init__(self, x, y, screen_width, img, reward):
+    def __init__(self, x, y, img, reward):
         super().__init__()
         
         # Enemy sprites
         path = '../graphics/enemy/' + img + '*.png'
+        self.img = img
         self.animation_sprites = [pygame.image.load(file).convert_alpha() for file in glob.glob(path)]
         self.current_sprite = 0
         self.image = self.animation_sprites[self.current_sprite]

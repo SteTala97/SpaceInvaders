@@ -37,7 +37,7 @@ class Game:
         self.pause_key_msg_font = pygame.font.Font('../graphics/fonts/font1.otf', 30)
         
         # Player setup
-        player_sprite = Player((WIDTH / 2, HEIGHT), WIDTH)
+        player_sprite = Player((WIDTH / 2, HEIGHT - 3), WIDTH)
         self.player = pygame.sprite.GroupSingle(player_sprite)
         
         # Enemy setup
@@ -91,7 +91,7 @@ class Game:
                 else:
                     img_name = 'enemy1'
                     reward = 100
-                enemy_sprite = Enemy(x, y, WIDTH, img_name, reward)
+                enemy_sprite = Enemy(x, y, img_name, reward)
                 self.enemies.add(enemy_sprite)
                 x += self.offset_x
             y += self.offset_y
@@ -108,7 +108,8 @@ class Game:
     def enemy_fire(self):
         if self.enemies.sprites():
             random_enemy = choice(self.enemies.sprites())
-            bullet_sprite = Bullet(random_enemy.rect.midbottom, WIDTH, 1, 'enemy_bullet1')
+            bullet_img = random_enemy.img + '_bullet1'
+            bullet_sprite = Bullet(random_enemy.rect.midbottom, WIDTH, 1, bullet_img)
             self.enemy_bullets.add(bullet_sprite)
             self.enemy_rocket_sound.play()
             
