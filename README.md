@@ -20,10 +20,10 @@ python3 -m pip install pygame
 Once it's installed, you need to just:
 ```
 cd code # change directory to the "code" directory which contains the python files
-main.py # execute the "main.py" file
+python3 main.py # execute the "main.py" file
 ```
 
-Congratulations! You've just been enlisted for the defense of our beloved planet from the evil green-faced aliens that are approaching it. They are planning to build a base on the moon in order to transfer the rest of the fleet and get ready for the invasion. Good luck space man! (or woman, or whatever you want to put after the word "space"... "space kitten" maybe? 😸👾)
+Congratulations! You've just been enlisted for the defense of our beloved planet from the evil green-faced aliens that are approaching it. They are planning to build a base on the moon in order to transfer the rest of the fleet and get ready for the invasion. Good luck space man! 🚀 (or woman, or whatever you want to put after the word "space"... "space kitten" maybe?)
 
 ## License
 
