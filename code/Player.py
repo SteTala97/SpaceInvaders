@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
       
     
     def shoot_bullet(self):
-        self.bullets.add(Bullet(self.rect.midtop, self.rect.y, -1, 'bullet1'))
+        self.bullets.add(Bullet(self.rect.midtop, self.rect.y, -1, 'player_bullet'))
     
     
     def get_keyboard_input(self):
