@@ -2,6 +2,7 @@ import pygame
 from Player import Player
 from Enemy import Enemy, SpecialEnemy
 from Bullet import Bullet
+from Explosion import Explosion
 from random import choice, randint
 import sys
 
@@ -75,6 +76,9 @@ class Game:
         self.victory_sound.set_volume(2.0)
         self.pause_sound = pygame.mixer.Sound('../sound/pause.wav')
         self.pause_sound.set_volume(2.0)
+
+        # Explosions
+        self.explosions = pygame.sprite.Group()
     
     
     def load_enemies(self, rows, cols):
@@ -91,8 +95,8 @@ class Game:
                 else:
                     img_name = 'enemy1'
                     reward = 100
-                enemy_sprite = Enemy(x, y, img_name, reward)
-                self.enemies.add(enemy_sprite)
+                    
+                self.enemies.add(Enemy(x, y, img_name, reward))
                 x += self.offset_x
             y += self.offset_y
             
@@ -108,7 +112,7 @@ class Game:
     def enemy_fire(self):
         if self.enemies.sprites():
             random_enemy = choice(self.enemies.sprites())
-            bullet_img = random_enemy.img + '_bullet1'
+            bullet_img = random_enemy.name + '_bullet'
             bullet_sprite = Bullet(random_enemy.rect.midbottom, WIDTH, 1, bullet_img)
             self.enemy_bullets.add(bullet_sprite)
             self.enemy_rocket_sound.play()
@@ -142,26 +146,32 @@ class Game:
         # Player's bullets
         if self.player.sprite.bullets:
             for bullet in self.player.sprite.bullets:
+
                 # Player hit an enemy
                 enemy_hit = pygame.sprite.spritecollide(bullet, self.enemies, True)
                 if enemy_hit:
                     for enemy in enemy_hit:
                         self.score += enemy.killing_reward
+                        self.explosions.add(Explosion(bullet.rect.center, enemy.name))
                     bullet.kill()
                     self.enemy_destroyed_sound.play()
+
                 # Player hit a special enemy
                 elif pygame.sprite.spritecollide(bullet, self.special, True):
                     self.score += 500
+                    self.explosions.add(Explosion(bullet.rect.midtop, "special"))
                     bullet.kill()
                     self.special_enemy_destroyed_sound.play()
                     self.special_enemy_sound.stop()
                     self.spawn_time = randint(self.spawn_time_min, self.spawn_time_max)
+
                 # Player hit an enemy bullet
                 elif self.enemy_bullets:
                     bullet_hit = pygame.sprite.spritecollide(bullet, self.enemy_bullets, True)
                     if bullet_hit:
+                        self.explosions.add(Explosion(bullet.rect.midtop, "bullet"))
                         bullet.kill()
-                        # PUT SOUND HERE <---
+                        # TODO: PUT SOUND HERE <---
                 
         # Enemy's bullets
         if self.enemy_bullets:
@@ -177,6 +187,14 @@ class Game:
                 # Enemy reached the player
                 if pygame.sprite.spritecollide(enemy, self.player, False) or enemy.rect.y >= HEIGHT:
                     self.game_over_menu(3)
+
+
+    def update_explosions(self):
+        if self.explosions:
+            for explosion in self.explosions:
+                explosion.update()
+                if explosion.terminated:
+                    self.explosions.remove(explosion)
                     
     
     def display_score(self):
@@ -229,7 +247,7 @@ class Game:
         
     def display_quitting_message(self):
         quit_msg = self.font_quit_msg.render('Are you sure? ENTER to play again or ESC to quit',
-                                                        False, 'white')
+                                             False, 'white')
         quit_rect = quit_msg.get_rect(center = (WIDTH / 2, HEIGHT / 2))
         quit_msg_bg = pygame.Surface(quit_msg.get_size())
         quit_msg_bg.fill((25, 25, 25))
@@ -333,6 +351,7 @@ class Game:
         self.check_special_enemy_position()
         self.special.update()
         self.check_for_collisions()
+        self.update_explosions()
         # Draw
         self.display_score()
         self.player.sprite.bullets.draw(screen)
@@ -340,6 +359,7 @@ class Game:
         self.enemies.draw(screen)
         self.special.draw(screen)
         self.enemy_bullets.draw(screen)
+        self.explosions.draw(screen)
         self.check_enemy_left()
         
             

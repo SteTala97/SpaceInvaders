@@ -7,7 +7,7 @@ class Bullet(pygame.sprite.Sprite):
         super().__init__()
         
         # Bullet sprites
-        path = '../graphics/bullet/' + img + '*.png'
+        path = '../graphics/bullet/' + img + '/*.png'
         self.animation_sprites = [pygame.image.load(file).convert_alpha() for file in glob.glob(path)]
         self.current_sprite = 0
         self.image =  self.animation_sprites[self.current_sprite]

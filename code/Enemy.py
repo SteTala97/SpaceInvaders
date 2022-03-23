@@ -8,7 +8,7 @@ class Enemy(pygame.sprite.Sprite):
         
         # Enemy sprites
         path = '../graphics/enemy/' + img + '*.png'
-        self.img = img
+        self.name = img
         self.animation_sprites = [pygame.image.load(file).convert_alpha() for file in glob.glob(path)]
         self.current_sprite = 0
         self.image = self.animation_sprites[self.current_sprite]
