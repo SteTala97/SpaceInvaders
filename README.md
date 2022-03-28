@@ -1,6 +1,7 @@
 # Space Invaders 👽
 
-![SI_screenshot](https://user-images.githubusercontent.com/82440452/158659398-76a0948b-c186-438a-a60e-b7b6ddd2795d.JPG)
+https://user-images.githubusercontent.com/82440452/160425020-b123f19e-a2d4-4adf-90af-86af962f9e9e.gif
+
 
 After watching many implementations of this wonderful and iconic game, I decided to spend some free time trying to implement my own version of it using Python and the [Pygame](https://pypi.org/project/pygame/) library.
 The code is written by me and will be updated from time to time when I'll pick it up again to add something else.
