@@ -25,7 +25,3 @@ python3 main.py # execute the "main.py" file
 ```
 
 Congratulations! You've just been enlisted for the defense of our beloved planet from the evil green-faced aliens that are approaching it. They are planning to build a base on the moon in order to transfer the rest of the fleet and get ready for the invasion. Good luck space man! 🚀 (or woman, or whatever you want to put after the word "space"... "space kitten" maybe?)
-
-## License
-
-There is no license attached to this repository, so feel free to download it, change it, use parts of this code in your project, use my sprites, or do anything you want with it 🎈 (but if you do, just for my personal curiosity please contact me to tell me that you did, and maybe even what you are doing/planning to do with it, I'd be glad to know! 😃)
