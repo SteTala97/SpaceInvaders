@@ -1,5 +1,5 @@
 # Space Invaders 👽
-
+(this is a toy project - just for fun)
 https://user-images.githubusercontent.com/82440452/160425020-b123f19e-a2d4-4adf-90af-86af962f9e9e.gif
 
 
